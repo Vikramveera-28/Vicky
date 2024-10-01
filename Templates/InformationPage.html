@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information Page</title>
+    {% load static %}
+<!--    <link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.min.css' %}">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<style>
+    .center-box{
+         height: 20rem;
+         width: 60rem;
+    }
+</style>
+
+<body class="bg-success-subtle">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">All Information</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item mx-2"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li class="nav-item mx-2"><a class="nav-link" href="{% url 'order' %}">Order</a></li>
+            <li class="nav-item mx-2"><a class="nav-link active" href="#">Information</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="position-absolute top-50 start-50 translate-middle center-box table-responsive  ">
+        <table class="table table-hover table-striped">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Item</th>
+                    <th>Size</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for data in information %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.phone }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.item }}</td>
+                    <td>{{ data.size }}</td>
+                    <td><a href="{% url 'edit' data.id %}" class="btn btn-primary w-100 p-0 px-1">Edit</a></td>
+                    <td><a href="{% url 'delete' data.id %}" class="btn btn-danger w-100 p-0 px-1">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
